@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
-import { UserModel } from "src/models/user.model";
-import { UserSchema } from "src/schemas/user.schema";
+import { UserModel } from 'src/models/user.model';
+import { UserSchema } from 'src/schemas/user.schema';
 export declare class UserController {
     private model;
     constructor(model: Repository<UserModel>);

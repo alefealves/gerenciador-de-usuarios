@@ -10,32 +10,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserModel = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const typeorm_1 = require("typeorm");
 let UserModel = class UserModel {
 };
 exports.UserModel = UserModel;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], UserModel.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ length: 100 }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], UserModel.prototype, "nome", void 0);
 __decorate([
     (0, typeorm_1.Column)({ length: 100 }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], UserModel.prototype, "sobrenome", void 0);
 __decorate([
     (0, typeorm_1.Column)({ length: 100 }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], UserModel.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)({ length: 100 }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], UserModel.prototype, "senha", void 0);
 __decorate([
     (0, typeorm_1.Column)('int'),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Number)
 ], UserModel.prototype, "nivel_acesso", void 0);
 exports.UserModel = UserModel = __decorate([

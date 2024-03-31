@@ -10,7 +10,6 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const user_module_1 = require("./modules/user.module");
-const db_module_1 = require("./db/db.module");
 const typeorm_1 = require("@nestjs/typeorm");
 let AppModule = class AppModule {
 };
@@ -18,9 +17,20 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'postgres',
+                host: process.env.POSTGRES_HOST,
+                port: +process.env.POSTGRES_PORT,
+                username: process.env.POSTGRES_USERNAME,
+                password: process.env.POSTGRES_PASSWORD,
+                database: process.env.POSTGRES_DATABASE,
+                autoLoadEntities: true,
+                entities: [__dirname + '../**/*.entity{.ts,.js}'],
+                migrations: [__dirname + '/../migration/{.ts,*.js}'],
+                migrationsRun: true,
+            }),
             user_module_1.UserModule,
-            config_1.ConfigModule.forRoot(),
-            typeorm_1.TypeOrmModule.forRoot([db_module_1.DbModule])
         ],
     })
 ], AppModule);

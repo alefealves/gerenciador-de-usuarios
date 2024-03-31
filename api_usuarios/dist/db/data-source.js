@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dataSourceOptions = void 0;
 const dotenv_1 = require("dotenv");
+const MainSeeder_1 = require("./seeds/MainSeeder");
 (0, dotenv_1.config)();
 exports.dataSourceOptions = {
     type: 'postgres',
@@ -13,6 +14,6 @@ exports.dataSourceOptions = {
     entities: [__dirname + '../**/*.entity{.ts,.js}'],
     migrations: [__dirname + '/migration/{.ts,*.js}'],
     migrationsRun: true,
-    seeds: ['dist/db/seeds/**/*.js'],
+    seeds: [MainSeeder_1.MainSeeder],
 };
 //# sourceMappingURL=data-source.js.map

@@ -5,8 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    UserModule, 
-    ConfigModule.forRoot(), 
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -14,13 +13,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.POSTGRES_USERNAME,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DATABASE,
+      autoLoadEntities: true,
       entities: [__dirname + '../**/*.entity{.ts,.js}'],
-      migrations: [__dirname + '/migration/{.ts,*.js}'],
+      migrations: [__dirname + '/../migration/{.ts,*.js}'],
       migrationsRun: true,
-    })],
-    controllers: [],
-    providers: [],
+    }),
+    UserModule,
+  ],
 })
-
 export class AppModule {}
-
