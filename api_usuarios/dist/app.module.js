@@ -8,9 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
 const config_1 = require("@nestjs/config");
 const user_module_1 = require("./modules/user.module");
+const db_module_1 = require("./db/db.module");
+const typeorm_1 = require("@nestjs/typeorm");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -19,16 +20,7 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             user_module_1.UserModule,
             config_1.ConfigModule.forRoot(),
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                host: process.env.DB_HOST,
-                port: Number(process.env.DB_PORT),
-                database: process.env.DB_DATABASE,
-                username: process.env.DB_USERNAME,
-                password: process.env.DB_PASSWORD,
-                autoLoadEntities: true,
-                entities: [__dirname + '../**/*.entity{.ts,.js}'],
-            })
+            typeorm_1.TypeOrmModule.forRoot([db_module_1.DbModule])
         ],
     })
 ], AppModule);

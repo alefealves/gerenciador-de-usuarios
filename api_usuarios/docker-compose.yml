@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres-usuarios
+    image: postgres
+    restart: always
+    env_file: ./.env
+    environment: 
+      - POSTGRES_USER=$POSTGRES_USERNAME
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DATABASE
+    ports:
+      - $POSTGRES_PORT:$POSTGRES_DOCKER_PORT
+    expose:
+      - $POSTGRES_DOCKER_PORT  
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U $POSTGRES_USERNAME -d $POSTGRES_DATABASE'"]
+      interval: 10s
+      timeout: 5s
+      retries: 3     
+  app:
+    depends_on:
+      postgres:
+        condition: service_healthy
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /usr/src/api
+    container_name: api-usuarios
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_LOCAL_PORT=$POSTGRES_DOCKER_PORT
+      - POSTGRES_DATABASE=$POSTGRES_DATABASE
+      - POSTGRES_USERNAME=$POSTGRES_USERNAME
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    stdin_open: true
+    tty: true                 

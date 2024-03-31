@@ -39,6 +39,6 @@ __decorate([
     __metadata("design:type", Number)
 ], UserModel.prototype, "nivel_acesso", void 0);
 exports.UserModel = UserModel = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)({ name: 'usuario' })
 ], UserModel);
 //# sourceMappingURL=user.model.js.map

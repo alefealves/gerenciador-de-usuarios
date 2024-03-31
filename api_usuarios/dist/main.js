@@ -9,7 +9,7 @@ async function bootstrap() {
     app.setGlobalPrefix('/api/v1');
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.useGlobalInterceptors(new transform_interceptors_1.TransformInterceptor());
-    await app.listen(8080);
+    await app.listen(3003);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
